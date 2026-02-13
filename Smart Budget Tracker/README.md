@@ -1,44 +1,61 @@
-# 🏦 Project: Smart Banking System (JS Internals)
+# Mini Banking App – JavaScript Practice
 
-You need to build a system that manages users' bank accounts.
-The system should be able to record transactions, calculate balances at exchange rates,
-and allow users to create a sub-account (e.g., a savings account) from their main account.
+## شرح مسئله
 
-## 🚀 Tasks & Requirements
+هدف این پروژه تمرین مفاهیم پیشرفته جاوااسکریپت است:
 
-### 1. Scoping and TDZ
+- Scope و Hoisting
+- this و تفاوت Arrow vs Regular Functions
+- Call Stack و Execution Context
+- Object References و Shallow/Deep Copy
+- Memory Management و Garbage Collection
 
-- Define a global `exchangeRate`.
-- Experiment with defining it after calling a function to observe the **Temporal Dead Zone (TDZ)**.
-
-### 2. Method Implementation & `this`
-
-- Create a `mainAccount` object with:
-  - `owner`: Name of the account holder.
-  - `movements`: Array of transactions (e.g., `[100, -50, 200]`).
-  - `details`: A nested object `{ branch: 'Central', type: 'Premium' }`.
-- **The `this` Challenge:** Write a method `showSummary()` that contains an inner function. Use an **Arrow Function** for the inner function to ensure it inherits the correct `this` context from the parent method.
-
-### 3. Arrow vs Regular Functions
-
-- Create a `greet` property as an arrow function and a `greetFixed` as a regular function.
-- Observe why `greet` cannot access `this.owner`.
-
-### 4. Memory Management (The Clone Challenge)
-
-- Create a `savingsAccount` by copying `mainAccount`.
-- **Task A:** Perform a Shallow Copy (`Object.assign`). Add a movement to `savingsAccount` and observe how it affects `mainAccount`.
-- **Task B:** Perform a Deep Copy (`structuredClone`). Modify the `details.type` and the `movements` array. Ensure the `mainAccount` remains unchanged.
-
-### 5. Dynamic Binding (Method Borrowing)
-
-- Create a simple object `guestUser` that only has a `movements` array.
-- Borrow the `showSummary` method from `mainAccount` and apply it to `guestUser` using `.call()` or `.apply()`.
+در این پروژه شما یک **سیستم بانکی ساده** پیاده‌سازی می‌کنید که
+کاربران می‌توانند موجودی خود را مدیریت کنند و تراکنش‌ها را ثبت کنند.
 
 ---
 
-## 🛠 Expected Output in Console
+## تسک‌ها
 
-1. Correct balance calculation using the global exchange rate.
-2. Demonstration of how `this` changes when a method is borrowed.
-3. Proof that Deep Copying prevents data leakage between objects in the **Heap**.
+### 1. ایجاد حساب کاربری
+
+- هر کاربر باید یک آبجکت با ویژگی‌های زیر داشته باشد:
+  - `name` (نام کاربر)
+  - `balance` (موجودی اولیه)
+  - `transactions` (آرایه‌ای برای ذخیره تراکنش‌ها)
+
+### 2. توابع مدیریت حساب
+
+- ایجاد توابع برای عملیات بانکی:
+  - `deposit(amount)` – اضافه کردن مبلغ به موجودی
+  - `withdraw(amount)` – کم کردن مبلغ از موجودی
+  - `transfer(amount, recipient)` – انتقال وجه به حساب دیگر
+
+- هر تراکنش باید در آرایه `transactions` ذخیره شود.
+
+### 3. تمرین Scope و this
+
+- تعریف توابع داخل آبجکت با هر دو نوع:
+  - Regular Function
+  - Arrow Function
+
+- مشاهده رفتار `this` در هر نوع تابع
+
+### 4. تمرین Hoisting و TDZ
+
+- ایجاد چند متغیر با `var`, `let`, `const`
+- استفاده از آن‌ها در توابع و بررسی رفتار Hoisting و TDZ
+
+### 5. تمرین Shallow vs Deep Copy
+
+- کپی کردن یک حساب کاربری
+- بررسی اثر تغییرات روی کپی و نسخه اصلی
+
+### 6. نمایش تراکنش‌ها
+
+- تابعی بساز که تراکنش‌های یک کاربر را در کنسول نمایش دهد
+
+### 7. Bonus: Garbage Collection
+
+- ایجاد یک حساب و سپس مقداردهی `null`
+- بررسی آزاد شدن حافظه
